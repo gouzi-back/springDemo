@@ -10,5 +10,5 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
        <!--结合注解@Service @autowride之类的注解-->
-        <context:component-scan base-package="edu.service.impl,edu.dao.impl"></context:component-scan>
+        <context:component-scan base-package="eduIoc.service.impl,eduIoc.dao.impl"></context:component-scan>
 </beans>
