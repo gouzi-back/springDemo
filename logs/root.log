@@ -1,1 +1,4 @@
 2021-01-29 15:23:53 AbstractApplicationContext.java WARN Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userService' defined in class path resource [ApplicationContext.xml]: Error setting property values; nested exception is org.springframework.beans.NotWritablePropertyException: Invalid property 'dao' of bean class [com.service.impl.UserServiceImpl]: Bean property 'dao' is not writable or has an invalid setter method. Does the parameter type of the setter match the return type of the getter?
+2021-01-29 19:35:39 ErrorLogger.java ERROR addNewUser方法发生异常java.lang.RuntimeException: 为测试程序效果抛出的异常
+2021-01-29 19:37:32 ErrorLogger.java ERROR addNewUser方法发生异常java.lang.RuntimeException: 为测试程序效果抛出的异常
+2021-01-29 19:44:54 ErrorLogger.java ERROR addNewUser方法发生异常java.lang.RuntimeException: 为测试程序效果抛出的异常

@@ -16,5 +16,28 @@
                 <ref bean="userDao"/>
             </constructor-arg>
         </bean>
+    <!--声明处理类的bean元素-->
+    <bean id="errorLogger" class="com.aop.ErrorLogger"></bean>
+    <aop:config>
+        <!--定义切入点-->
+        <aop:pointcut id="pointcut" expression="execution( public void addNewUser(com.entity.User ))"/>
+        <!--织入增强处理 -->
+        <aop:aspect ref="errorLogger">
+            <!--将afterThrowing方法定义为异常抛出增强并引入切入点pointcut-->
+            <!--通过throwing属性为参数e注入异常实例-->
+            <aop:after-throwing method="afterThrowing" pointcut-ref="pointcut" throwing="e" />
+        </aop:aspect>
+    </aop:config>
 
+    <bean id="afterLogger" class="com.aop.AfterLogger"></bean>
+    <aop:config>
+        <!--定义切入点-->
+        <aop:pointcut id="pointcut" expression="execution( public void addNewUser(com.entity.User ))"/>
+        <!--织入增强处理 -->
+        <aop:aspect ref="afterLogger">
+            <!--将afterThrowin方法定义为最终增强并引入切入点pointcut-->
+            <!--通过throwing属性为参数e注入异常实例-->
+            <aop:after method="after" pointcut-ref="pointcut"  />
+        </aop:aspect>
+    </aop:config>
 </beans>
