@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--bean 元素声明spring创建的对象实例 id属性指定对象的唯一标识符
+        方便对象的使用。class属性可以指定被声明的实例对应的类-->
+    <bean id="helloSpring" class="com.springDemo.HelloSpring">
+        <!--指定被赋值的属性名-->
+        <property name="who">
+           <value>Spring</value>
+        </property>
+    </bean>
+    <bean id="greyInk" class="cn.ink.GreyInk"></bean>
+    <bean id="colorInk" class="cn.ink.ColorInk"></bean>
+    <bean id="a4paper" class="cn.ink.TestPaper">
+        <property name="charPerLine" value="8"/>
+        <property name="linePerPage" value="6"/>
+    </bean>
+    <bean id="b5paper" class="cn.ink.TestPaper">
+        <property name="charPerLine" value="6"/>
+        <property name="linePerPage" value="5"/>
+    </bean>
+    <bean id="printer" class="cn.printer.Printer">
+        <property name="ink" ref="colorInk"/>
+        <property name="paper" ref="a4paper"/>
+     </bean>
+
+
+    <!--AOP实现自动的系统日志功能-->
+    <bean id="userDao" class="com.dao.impl.UserDaoIMpl"></bean>
+    <bean id="userService" class="com.service.impl.UserServiceImpl">
+        <property name="dao" ref="userDao"/>
+    </bean>
+    <!--声明处理类的bean元素-->
+    <bean id="theLogger" class="com.aop.UserServiceLogger"></bean>
+    <aop:config>
+        <!--定义切入点-->
+        <aop:pointcut id="pointcut" expression="execution( public void addNewUser(com.entity.User ))"/>
+        <!--织入增强处理 -->
+        <aop:aspect ref="theLogger">
+            <!--定义前置增强 引入切入点-->
+            <aop:before method="before" pointcut-ref="pointcut"/>
+            <!--定义后置增强 引入切入点 注入目标方法的返回值result-->
+            <aop:after-returning method="afterReturning" pointcut-ref="pointcut" returning="result" />
+        </aop:aspect>
+    </aop:config>
+</beans>
