@@ -12,6 +12,13 @@ import com.service.UserService;
  */
 public class UserServiceImpl implements UserService {
     private UserDao dao;
+    //为dao赋值的有参构造方法
+    public UserServiceImpl(UserDao dao) {
+        this.dao = dao;
+    }
+    //无参构造
+    public UserServiceImpl() {
+    }
 
     public UserDao getDao() {
         return dao;
